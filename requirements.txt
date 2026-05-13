@@ -1,0 +1,14 @@
+# Web Framework (includes uvicorn, httpx, etc.)
+fastapi[standard]
+
+# AI & API
+anthropi
+
+# Configuration & Environment
+python-dotenv
+pydantic-settings
+
+# Database (For Part 2/3 Implementation)
+# We'll use asyncpg for high-performance async Postgres connections
+asyncpg
+sqlalchemy[asyncio]
