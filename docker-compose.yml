@@ -9,7 +9,7 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=postgresql://nistula_user:nistula_password@db:5432/nistula_db
+      - DATABASE_URL=postgresql+asyncpg://nistula_user:nistula_password@db:5432/nistula_db
     volumes:
       - .:/app
     depends_on:
