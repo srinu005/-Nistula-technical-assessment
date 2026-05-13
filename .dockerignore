@@ -1,0 +1,33 @@
+# Git
+.git
+.gitignore
+
+# Python
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment and Secrets
+.env
+*.secrets
+
+# IDEs
+.vscode/
+.idea/
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation/System
+README.md
+*.log
+.DS_Store
