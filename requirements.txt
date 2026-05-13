@@ -2,7 +2,7 @@
 fastapi[standard]
 
 # AI & API
-anthropi
+anthropic
 
 # Configuration & Environment
 python-dotenv
@@ -12,3 +12,7 @@ pydantic-settings
 # We'll use asyncpg for high-performance async Postgres connections
 asyncpg
 sqlalchemy[asyncio]
+
+#Test tools
+pytest
+pytest-asyncio

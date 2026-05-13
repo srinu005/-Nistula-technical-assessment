@@ -1,20 +1,25 @@
-from fastapi import FastAPI, Depends
-from core.config import settings
+from fastapi import FastAPI, Depends, HTTPException
 from models.schemas import WebhookPayload, FinalResponse
 from services.ai_service import ClaudeProvider
 from services.orchestrator import MessageOrchestrator
 
-app = FastAPI(title="Nistula API")
+app = FastAPI(title="Nistula Guest API")
 
-# Dependency Injection setup
+# Dependency Injection
 def get_orchestrator():
-    # We can easily swap ClaudeProvider() for another provider here
-    ai_provider = ClaudeProvider()
-    return MessageOrchestrator(ai_provider)
+    return MessageOrchestrator(ClaudeProvider())
+
+@app.get("/")
+def health_check():
+    return {"status": "online", "system": "Nistula Messaging"}
 
 @app.post("/webhook/message", response_model=FinalResponse)
-async def handle_message(
-    payload: WebhookPayload, 
+async def handle_webhook(
+    payload: WebhookPayload,
     orchestrator: MessageOrchestrator = Depends(get_orchestrator)
 ):
-    return orchestrator.process(payload)
+    try:
+        return await orchestrator.process(payload)
+    except Exception as e:
+        # Graceful error handling for the guest
+        raise HTTPException(status_code=500, detail=str(e))
